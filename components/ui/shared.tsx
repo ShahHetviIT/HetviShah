@@ -1,4 +1,4 @@
-import { ArrowDownToLine, ArrowUpRight, Github, Linkedin } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin } from "lucide-react";
 import { isSocialUrl, portfolio } from "@/data/portfolio";
 
 export function SocialLinks({ iconsOnly = false }: { iconsOnly?: boolean }) {
@@ -45,19 +45,21 @@ export function ResumeLink({
         className={`resume-unavailable ${compact ? "compact" : ""}`}
         title="Resume will be available soon"
       >
-        <ArrowDownToLine size={15} aria-hidden="true" />
-        {compact ? "Resume" : "Download resume"}
+        <ArrowUpRight size={15} aria-hidden="true" />
+        {compact ? "Resume" : "View resume"}
         <span className="soon">Soon</span>
       </span>
     );
   return (
     <a
       href={portfolio.resume}
-      download
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="View resume (PDF, opens in a new tab)"
       className={`button ${compact ? "button-nav" : "button-secondary"}`}
     >
-      <ArrowDownToLine size={16} aria-hidden="true" />
-      {compact ? "Resume" : "Download resume"}
+      <ArrowUpRight size={16} aria-hidden="true" />
+      {compact ? "Resume" : "View resume"}
     </a>
   );
 }

@@ -19,6 +19,12 @@ test("renders the portfolio with valid internal links and safe placeholders", as
   await expect(page.locator(".project-card")).toHaveCount(projects.length);
   expect(await page.locator('a[href*="ADD_"]').count()).toBe(0);
   expect(await page.locator('a[href="/resume.pdf"]').count()).toBe(2);
+  for (const link of await page.locator('a[href="/resume.pdf"]').all()) {
+    await expect(link).toHaveAttribute("target", "_blank");
+    await expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    await expect(link).not.toHaveAttribute("download");
+    await expect(link).toHaveAccessibleName("View resume (PDF, opens in a new tab)");
+  }
   expect(await page.locator('a[href^="mailto:"]').count()).toBe(0);
   const missingTargets = await page
     .locator('a[href^="#"]')
@@ -178,9 +184,20 @@ test("metadata assets and crawler routes respond successfully", async ({
     const response = await request.get(route);
     expect(response.ok(), route).toBeTruthy();
   }
-  expect(await (await request.get("/robots.txt")).text()).toContain(
-    "Disallow: /",
-  );
+  const origin = new URL(
+    process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
+      "https://hetvi-shah-portfolio.vercel.app",
+  ).origin;
+  const robots = await (await request.get("/robots.txt")).text();
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  expect(robots).toContain("Allow: /");
+  expect(robots).not.toContain("Disallow: /");
+  expect(robots).toContain(`Sitemap: ${origin}/sitemap.xml`);
+  expect(sitemap).toContain(`<loc>${origin}</loc>`);
+  expect(sitemap.match(/<loc>/g)).toHaveLength(projects.length + 1);
+  for (const project of projects) {
+    expect(sitemap).toContain(`<loc>${origin}/projects/${project.slug}</loc>`);
+  }
 });
 
 test("reduced-motion rendering has no hydration errors", async ({ page }) => {

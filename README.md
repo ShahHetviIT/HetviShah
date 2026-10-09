@@ -43,7 +43,7 @@ Edit `data/portfolio.ts` for the name, bio, location, social links, email, resum
 
 - Set `portfolio.socials.github` and `portfolio.socials.linkedin` to real HTTPS URLs. Values beginning with `ADD_` and invalid URLs are never rendered as links.
 - Set `portfolio.email` to a real email address. Until then, the contact area shows “Contact details coming soon” without a broken mail link.
-- Your supplied resume is already at **`public/resume.pdf`**, and both resume buttons download it. Replace that file when your resume changes, then rebuild. If it is removed, the controls automatically show a “Soon” state instead of a broken link.
+- Your supplied resume is at **`public/resume.pdf`**. Both resume buttons open it in a new tab, where visitors can read it or use their PDF viewer's download option. Replace that file when your resume changes, then rebuild. If it is removed, the controls automatically show a “Soon” state instead of a broken link.
 - Every project card opens its local `/projects/[slug]` overview in a new tab. Edit `projects[].slug` and `projects[].overview` alongside the existing contributions, technologies, and workflow to maintain each detail page. All five routes are statically generated.
 - Live website links have been removed from all project overviews. Diagram pause controls and the home-page “Inside the build” disclosures remain independent of the card link.
 - Edit the skill groups to add or remove skills. No proficiency percentages are used.
@@ -52,17 +52,17 @@ Structural section copy lives in the corresponding components. All professional 
 
 ## Domain and SEO
 
-**Localhost is the current setup.** No production domain has been assumed.
+The production domain is **https://hetvi-shah-portfolio.vercel.app**.
 
-`.env.example` documents the optional `NEXT_PUBLIC_SITE_URL`. Leave it empty locally. Without a valid production HTTPS domain, canonical URLs are omitted, robots disallows indexing, and the sitemap is empty. This prevents publishing an invented canonical domain.
+Production builds use this domain by default for canonical URLs, social metadata, structured data, and the sitemap. `/sitemap.xml` includes the homepage and all five project overviews; `/robots.txt` allows crawling and points to the sitemap. Vercel previews remain excluded from indexing, with crawling disallowed and an empty sitemap. Local development behaves the same unless a valid URL override is configured.
 
-When your domain is known, set:
+For a future custom domain, set `NEXT_PUBLIC_SITE_URL` in Vercel's Production environment:
 
 ```dotenv
 NEXT_PUBLIC_SITE_URL=https://your-real-domain
 ```
 
-Rebuild after changing it. This enables the canonical URL, Open Graph URL, indexing, and sitemap. The application includes Person JSON-LD, Open Graph/Twitter image generation, SVG favicon, and Apple touch icon. Social preview image URLs use localhost during local development.
+Redeploy after changing it. Editing `.env.example` alone does not configure Vercel. After deployment, check `/robots.txt` and `/sitemap.xml`, then submit `sitemap.xml` in Google Search Console. The application includes Person JSON-LD, Open Graph/Twitter image generation, SVG favicon, and Apple touch icon.
 
 ## Deploy to Vercel later
 
@@ -70,8 +70,8 @@ Rebuild after changing it. This enables the canonical URL, Open Graph URL, index
 2. Choose the **Next.js** preset and a supported Node.js version (20.9 or newer).
 3. Keep the default install/build settings: `npm install` and `npm run build`.
 4. Add real contact information and `public/resume.pdf` if available.
-5. Set `NEXT_PUBLIC_SITE_URL` to the final production URL, including `https://`. A Vercel-assigned URL works too once it is known.
-6. Deploy. If the URL was assigned after the first deployment, add the variable and redeploy.
+5. Optionally set `NEXT_PUBLIC_SITE_URL` when using a custom domain. The confirmed Vercel domain is already the production default.
+6. Deploy and verify `/robots.txt` and `/sitemap.xml` on the production domain.
 
 No database or server setup is needed. Nothing has been deployed by this task.
 
