@@ -74,7 +74,7 @@ export function Projects() {
           {visible.map((project) => (
             <Reveal
               key={project.id}
-              className={`project-wrap ${project.id === "01" || project.kind === "software" ? "project-wide" : ""}`}
+              className={`project-wrap ${project.id === "01" ? "project-wide" : ""}`}
             >
               <ProjectCard project={project} />
             </Reveal>

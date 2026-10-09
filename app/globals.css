@@ -1583,8 +1583,8 @@ main[tabindex="-1"]:focus {
   color: #84a497;
 }
 .project-data .project-card-inner {
-  display: grid;
-  grid-template-columns: 1fr 2.3fr;
+  display: flex;
+  flex-direction: column;
 }
 .project-data .project-content {
   padding: 27px 30px;
@@ -1600,7 +1600,7 @@ main[tabindex="-1"]:focus {
 }
 .project-data .project-visual {
   background: #e9ecef;
-  border-right: 1px solid #dde1e6;
+  border-bottom: 1px solid #dde1e6;
 }
 .project-data .project-visual:before {
   opacity: 0.45;
