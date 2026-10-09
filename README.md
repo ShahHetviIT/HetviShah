@@ -54,6 +54,8 @@ Structural section copy lives in the corresponding components. All professional 
 
 The production domain is **https://hetvi-shah-portfolio.vercel.app**.
 
+The production robots file explicitly allows Googlebot, Google-Extended (Gemini), OpenAI's OAI-SearchBot/GPTBot/ChatGPT-User, ClaudeBot/Claude-SearchBot/Claude-User, and PerplexityBot/Perplexity-User. The `*` rule covers other compliant crawlers. This permits search and retrieval as well as model-training uses for the relevant bots; it does not guarantee indexing or inclusion in AI answers. All listed agents receive `Disallow: /` when the site URL is disabled, including Vercel previews. Robots directives are advisory, and some user-initiated fetchers may not apply them.
+
 Production builds use this domain by default for canonical URLs, social metadata, structured data, and the sitemap. `/sitemap.xml` includes the homepage and all five project overviews; `/robots.txt` allows crawling and points to the sitemap. Vercel previews remain excluded from indexing, with crawling disallowed and an empty sitemap. Local development behaves the same unless a valid URL override is configured.
 
 For a future custom domain, set `NEXT_PUBLIC_SITE_URL` in Vercel's Production environment:
