@@ -22,15 +22,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const project = projects.find((item) => item.slug === slug);
   if (!project) notFound();
-  const title = `${project.name} | ${portfolio.name}`;
+  const title = `${project.seo.title} | ${portfolio.name}`;
+  const description = project.seo.description;
   const url = siteUrl ? `${siteUrl}/projects/${project.slug}` : undefined;
   return {
     title,
-    description: project.description,
+    description,
     ...(url ? { alternates: { canonical: url } } : {}),
     openGraph: {
       title,
-      description: project.description,
+      description,
       type: "article",
       siteName: portfolio.name,
       ...(url ? { url } : {}),
@@ -38,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title,
-      description: project.description,
+      description,
     },
   };
 }

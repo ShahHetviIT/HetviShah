@@ -13,7 +13,7 @@ test("renders the portfolio with valid internal links and safe placeholders", as
   });
   await page.goto("/");
   await expect(page).toHaveTitle(
-    "Hetvi Shah | AI Engineer & Software Engineer",
+    "Hetvi Shah | AI Engineer for Voice Agents & RAG",
   );
   await expect(page.locator("h1")).toHaveCount(1);
   await expect(page.locator(".project-card")).toHaveCount(projects.length);
@@ -40,7 +40,13 @@ test("renders the portfolio with valid internal links and safe placeholders", as
     .locator('script[type="application/ld+json"]')
     .textContent();
   expect(JSON.parse(structured!).name).toBe("Hetvi Shah");
-  await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    new URL(
+      process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
+        "https://hetvi-shah-portfolio.vercel.app",
+    ).origin,
+  );
   expect(errors).toEqual([]);
 });
 

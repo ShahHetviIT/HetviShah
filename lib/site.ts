@@ -1,6 +1,6 @@
-export const siteTitle = "Hetvi Shah | AI Engineer & Software Engineer";
+export const siteTitle = "Hetvi Shah | AI Engineer for Voice Agents & RAG";
 export const siteDescription =
-  "AI Engineer specializing in agentic AI, LangGraph, LLM applications, AI workflow automation, Python/FastAPI, and backend engineering.";
+  "Explore Hetvi Shah's AI engineering work: agents that plan strategy, voice assistants that handle bookings, and RAG pipelines that find company knowledge.";
 function configuredOrigin(): string | undefined {
   // Preview deployments should not compete with the production site's URLs.
   if (process.env.VERCEL_ENV && process.env.VERCEL_ENV !== "production")

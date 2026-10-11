@@ -86,7 +86,11 @@ test("every project opens its own complete overview in a new tab", async ({
     overview.on("pageerror", (error) => errors.push(error.message));
     await overview.waitForLoadState("load");
     await expect(overview).toHaveURL(`/projects/${project.slug}`);
-    await expect(overview).toHaveTitle(`${project.name} | Hetvi Shah`);
+    await expect(overview).toHaveTitle(`${project.seo.title} | Hetvi Shah`);
+    await expect(overview.locator('meta[name="description"]')).toHaveAttribute(
+      "content",
+      project.seo.description,
+    );
     await expect(overview.getByRole("heading", { level: 1 })).toHaveText(
       project.name,
     );
@@ -115,7 +119,14 @@ test("every project opens its own complete overview in a new tab", async ({
     const live = overview.getByRole("link", { name: /Visit .* website/ });
     await expect(live).toHaveCount(0);
     await expect(overview.locator('a[href*="ADD_"]')).toHaveCount(0);
-    await expect(overview.locator('link[rel="canonical"]')).toHaveCount(0);
+    const origin = new URL(
+      process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
+        "https://hetvi-shah-portfolio.vercel.app",
+    ).origin;
+    await expect(overview.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      `${origin}/projects/${project.slug}`,
+    );
     expect(errors).toEqual([]);
     await overview.close();
     await expect(page).toHaveURL("/");

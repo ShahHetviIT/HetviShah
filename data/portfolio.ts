@@ -1,6 +1,7 @@
 export interface Project {
   id: string;
   slug: string;
+  seo: { title: string; description: string };
   overview: string[];
   name: string;
   category: string;
@@ -76,6 +77,11 @@ export const projects: Project[] = [
   {
     id: "01",
     slug: "strategy-navigator",
+    seo: {
+      title: "Strategy Navigator: AI Strategy Workflows",
+      description:
+        "Follow a strategy brief through AI idea generation, voting, and reports. Hetvi Shah's work connects LangGraph agents, n8n, and workflow recovery.",
+    },
     overview: [
       "Strategy Navigator takes a user’s project context through domain-specific agent generation, contextual and foundational agent selection, idea generation, voting, and report creation. The system combines multi-agent analysis with context-aware workflow automation.",
       "Rapid Insight idea generation runs in parallel with 10-step form filling. The form branch continues into foresight processing, then rapid insights, foresight ideas, and human ideas are consolidated. The user selects ideas and a voting foundational agent before the parent and child voting agents run through voting middleware.",
@@ -135,6 +141,11 @@ export const projects: Project[] = [
   {
     id: "02",
     slug: "cydra-social",
+    seo: {
+      title: "CYDRA Social: From Draft to Published Post",
+      description:
+        "From one idea to a scheduled post: Hetvi Shah's work on CYDRA connects content agents, editorial review, and publishing to LinkedIn, X, and Meta.",
+    },
     overview: [
       "CYDRA Social connects AI-assisted content creation with the practical steps of social publishing. Professionals can create content manually or generate variations, refine drafts, manage media, and schedule posts for LinkedIn, X, and Meta.",
       "I worked across AI, backend, and frontend layers. Specialized Viral, SEO, Community, and Curator agents support generation and review, while FastAPI services, React interfaces, OAuth integrations, and webhooks connect the content workflow to scheduling and publishing.",
@@ -176,6 +187,11 @@ export const projects: Project[] = [
   {
     id: "03",
     slug: "conversational-ai-voice-agents",
+    seo: {
+      title: "Multilingual AI Voice Agents",
+      description:
+        "A spoken request becomes a booking or follow-up. See Hetvi Shah's voice agent workflows with Pipecat, Gemini, and Twilio across five languages.",
+    },
     overview: [
       "These voice agents support inbound and outbound conversations across healthcare, BFSI, insurance, and retail workflows. They combine conversation context with tool calling so a conversation can lead to actions such as bookings, follow-ups, order tracking, loan processing, and claims.",
       "I built voice workflows with Python, Pipecat, LangGraph, Gemini, Twilio, and ElevenLabs. The work included automatic language handling for English, Hindi, Gujarati, Marathi, and Spanish, together with conversation state, retries, external API integrations, and reusable agent components.",
@@ -217,6 +233,11 @@ export const projects: Project[] = [
   {
     id: "04",
     slug: "wishai-knowledge-assistant",
+    seo: {
+      title: "WishAI: RAG Search for Company Knowledge",
+      description:
+        "From scattered documents to grounded answers: Hetvi Shah's work on WishAI spans Qdrant retrieval, document ingestion, guardrails, and a React chat UI.",
+    },
     overview: [
       "WishAI is an internal knowledge assistant that helps employees find organizational documents and resources. Its retrieval-augmented generation workflow connects a question to relevant knowledge before a language model produces a grounded answer.",
       "My work covered document ingestion, chunking, embeddings, metadata filtering, and Qdrant retrieval. I also connected FastAPI and LangGraph workflows to a React chat interface, with dynamic model selection, response caching, guardrails, structured validation, and token monitoring.",
@@ -258,6 +279,11 @@ export const projects: Project[] = [
   {
     id: "05",
     slug: "web-data-intelligence",
+    seo: {
+      title: "Web Data Intelligence: Lead Enrichment",
+      description:
+        "Trace company and contact data from collection to enrichment. Hetvi Shah's backend work combines Spring Boot, web scraping, and email verification.",
+    },
     overview: [
       "This modular platform combines company and professional information from multiple sources. Its workflows cover Clutch and Y Combinator company data, RocketReach person data, email verification, aggregation, and enrichment, alongside email campaigns and tracking.",
       "I worked on Spring Boot services, scraping with Selenium and Jsoup, external API integrations, and company and person aggregation services. The supporting application includes REST APIs, authentication and security, and React dashboards.",
